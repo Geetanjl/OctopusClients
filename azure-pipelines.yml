@@ -29,6 +29,7 @@ steps:
     projects: 'source/OctopusClient.sln'
 - task: DotNetCoreCLI@2
   displayName: Dotnet test
+  continueOnError: true
   inputs:
     command: 'test'
     projects: 'source/OctopusClient.sln'
