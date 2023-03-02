@@ -1,0 +1,40 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NuGetCommand@2
+  displayName: Nuget restore
+  inputs:
+    command: 'restore'
+    restoreSolution: 'OctopusClient.sln'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  displayName: Dotnet restore
+  inputs:
+    command: 'restore'
+    projects: 'source/OctopusClient.sln'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  displayName: Dotnet build
+  inputs:
+    command: 'build'
+    projects: 'source/OctopusClient.sln'
+- task: DotNetCoreCLI@2
+  displayName: Dotnet test
+  inputs:
+    command: 'test'
+    projects: 'source/OctopusClient.sln'
+- task: PublishBuildArtifacts@1
+  displayName: publish artifact
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
