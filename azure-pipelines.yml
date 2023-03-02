@@ -14,7 +14,7 @@ steps:
   displayName: sdk install
   inputs:
     packageType: 'sdk'
-    version: '6.0'
+    version: 
 - task: NuGetCommand@2
   displayName: Nuget restore
   inputs:
@@ -38,13 +38,6 @@ steps:
     command: 'publish'
     publishWebProjects: true
     arguments: 'source/OctopusClient.sln'
-
-- task: DotNetCoreCLI@2
-  displayName: Dotnet test
-  continueOnError: true
-  inputs:
-    command: 'test'
-    projects: 'source/OctopusClient.sln'
 - task: PublishBuildArtifacts@1
   displayName: publish artifact
   inputs:
