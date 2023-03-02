@@ -32,12 +32,6 @@ steps:
   inputs:
     command: 'build'
     projects: 'source/OctopusClient.sln'
-- task: DotNetCoreCLI@2
-  displayName: Dotnet Publish
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-    arguments: 'source/OctopusClient.sln'
 - task: PublishBuildArtifacts@1
   displayName: publish artifact
   inputs:
